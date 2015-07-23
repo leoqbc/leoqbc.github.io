@@ -314,12 +314,19 @@ echo (new Robot)->getBag()[1]; // Imprime: legs
 				</section>
                                 <section>
                                     <section>
-                                        <h3>Funções Mágicas</h3>
+                                        <h3>Métodos Mágicos</h3>
                                         <p>O mago</p>
                                         <p><img src="imgs/nopower.gif"></p>
                                         <p>Aos Javeiros!</p>
                                     </section>
-                                    <section>
+                             	    <section>
+					<h4>Métodos disponíveis</h4>
+					<p style="color: #0099cd"> __construct __destruct __get __set __isset __unset
+					    __sleep __wakeup __clone __invoke __call __callStatic
+					     __set_state __debugInfo 
+					</p>
+				    </section>
+				    <section>
 <pre>
 <code class="php" data-trim>
 class DataMaker
@@ -399,7 +406,7 @@ $list = [1, 2, 3];
     echo 'Out:', $a, $b, $c;
 }))[$list]; 
 
-// Imprime 123Out:123
+// Imprime In:123Out:123
 
 // O.O
 </code>
