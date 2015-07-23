@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>PHP Freakshow por Leonardo Tumadjian</title>
+
+		<meta name="description" content="PHP Freak Show">
+		<meta name="author" content="Leonardo Tumadjian">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+                <link rel="stylesheet" href="css/theme/blood.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+                <link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>PHP Freakshow</h1>
+					<h4><a href="http://about.me/leonardotumadjian">Leonardo Tumadjian</a></h4>
+                                        <br>
+                                        <h4><a href="www.thedevelopersconference.com.br">The Developers Conference - São Paulo</a></h4>
+                                        <p>25/07/2015</p>
+				</section>
+                                
+                                <section>
+					<h2>Sobre mim:</h2>
+                                        <div class="fragment"><small>Formado em Análise e Desenvolvimento de Sistema pela Estácio UniRadial</small></div>
+                                        <div class="fragment"><small>Programador PHP desde 2009</small></div>
+                                        <div class="fragment"><small>Instrutor desde 2012</small></div>
+                                        <div class="fragment"><small>Nas horas vagas: Gamer, Biker, Shooter</small></div>
+                                        <div class="fragment"><small>Evangelista da comunidade <span style="color: #0099cd">PHPSP</span></small></div>
+                                        <div class="fragment"><small>Víciado em séries estranhas!</small></div>
+				</section>
+                                
+                                <section>
+					<h2>Recomendo assistir =D</h2>
+                                        <img src="imgs/A1IlggU.jpg">
+				</section>
+                                
+                                <section>
+					<h2>Antes de começarmos:</h2>
+                                        <p>Contribua com sua comunidade mais próxima, se tiver um tempo ;)</p>
+                                        <a href="http://phpsp.org.br"><img style="background: #FFF" src="imgs/phpsp.png"></a><br>
+                                        <a style="color: #0099cd" href="http://phpsp.org.br/como-contribuir/">Como contribuir?</a>
+				</section>
+                            
+                                <section>
+					<h2 style="color: red">Atenção!</h2>
+                                        <p>
+                                            <small>
+                                                O conteúdo a seguir pode conter cenas fortes, códigos sujos, violência contra as boas práticas, esquisitices, loucuras e muito mais..
+                                            </small>
+                                        </p>
+                                        <img src="imgs/warning.png">
+                                        <p>
+                                            <small>
+                                                Em caso de fortes problemas cardíacos prefira: Design Patterns, SOLID, DDD e etc..
+                                            </small>
+                                            <small>
+                                                Não tente fazer isso em casa, e muito menos no trabalho, obrigado!
+                                            </small>
+                                        </p>
+				</section>
+                            
+				<section data-background="imgs/americanhorror.jpg">
+					<h2>Wellcome!</h2>
+					<p>
+                                            Sejam bem vindos ao PHP Freak Show, o show já vai começar, preparem-se.
+					</p>
+                                        <div class="fragment"><h4 style="color: #0099cd">Ainda da tempo de correr</h4></div>
+                                        <div class="fragment"><h4 style="color: #0099cd">Não?</h4></div>
+                                        <div class="fragment"><h4 style="color: #0099cd">Ok, então...</h4></div>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h3>Variáveis variáveis!</h3>
+						<p>A mulher elástica</p>
+<pre><code class="php" data-trim>
+$first = 'what';
+$what = 'the';
+$the = 'hell';
+$hell = 'is this!?';
+
+echo $$$$first; // Imprime: is this!?
+</code></pre>
+<pre><code class="php" data-trim>
+// ...
+private $mine='No!!';
+
+public function getProp($prop)
+{
+    return $this->$prop;
+}
+// ...
+$robot = new Robot('Mike', 436878);
+$mine = $robot->getProp('mine');
+var_dump($mine);
+// Imprime: string 'No!!' (length=4)
+</code></pre>
+					</section>
+					<section>
+						<h3>Agora a aberração:</h3>
+                                                <div style='color: #0099cd' class="fragment">Preparados?</div>
+<div class="fragment"><pre><code class="php" data-trim>
+// ...
+$obj = 'myRobot';
+$class = 'Robot';
+$param1 = 'Robotron';
+$param2 = 5532;       
+$method = 'say';
+$word = 'Hello Humans';
+
+$$obj = (new $class($param1, $param2))->$method($word); // Imprime Hello Humans
+// ...
+</code></pre>
+</div>
+					</section>
+				</section>
+
+				<section>
+                                    <section>
+                                        <h3>
+                                            <span style='color: #0099cd'>S</span>tandard 
+                                            <span style='color: #0099cd'>P</span>HP 
+                                            <span style='color: #0099cd'>L</span>ibrary </h3>
+					<p>
+						O gigante de quatro braços
+					</p>
+                                    </section>
+                                    <section>
+                                        <h3>Usaremos:</h3>
+                                        <ol>
+                                            <li>ArrayIterator</li>
+                                            <li>ArrayAccess(Interface)</li>
+                                        </ol>
+                                    </section>
+                                    <section>
+                                        <h3>Primeira Loucura</h3>
+<div class="fragment"><pre><code class="php" data-trim>
+class Writer extends \ArrayIterator
+{
+    public function offsetGet($index) 
+    {
+        echo $index . ' ';
+        return $this;
+    }
+}
+
+$whiter = new Writer();
+$whiter['Hello']['World']; // Imprime: Hello World
+
+$whiter['But']['when']['this']['is']['over?']; // Imprime: But when this is over? 
+</code></pre>
+                                    </section>
+                                    <section data-background="imgs/cabeca.gif">
+                                        <div class="fragment"><h2 style="color: #0099cd">Calma!</h2></div>
+                                        <div class="fragment"><h2 style="color: #0099cd">Sempre pode piorar!</h2></div>
+                                    </section>
+                                    <section>
+                                    <h3 style="color: #0099cd">Posso?</h3>
+ <div class="fragment"><pre><code class="php" data-trim>
+class Crazy implements \ArrayAccess 
+{
+    // ... some code here
+    public function offsetGet($offset) 
+    {
+        $this->phrase[] = $this->tagIn() . $offset . $this->tagOut();
+        return $this;
+    }
+    // ...
+    public function color($colorHex)
+    {
+        $last = &$this->phrase[count($this->phrase)-1];
+        $last = '<div style="color: ' . $colorHex .'">'
+                . $last . '</div>';
+        return $this;
+    }
+    // ... more code bellow
+}
+</code></pre>                                       
+                                    </section>
+                                    <section>
+                                    <h4>Agora vamos usa-la?</h4>
+ <div class="fragment"><pre>
+<code class="php" data-trim>
+// Using the class Crazy!
+$crazy = new Crazy;
+
+$crazy['Hello']
+        ['world']
+        ['what`s up?']
+        ['is this']
+        ['too']
+        ['crazy for you?']
+        ->write();
+</code></pre>
+ </div>
+<div class="fragment">
+    <p>E agora? Onde está seu deus?</p>
+<pre>
+<code class="php" data-trim>
+// Using the class Crazy!
+$crazy = new Crazy;
+
+$crazy['Hello']
+        ['world']->color('blue')
+        ['what`s up?']
+        ['is this']->color('red')
+        ['too']
+        ['crazy for you?']->color('green')
+        ->write();
+</code>
+</pre>
+</div>
+                                    </section>
+                                    <section>
+                                        <h4>Resultado do último código:</h4>
+                                        <img src="imgs/splarrayaccess.jpg">
+                                    </section>
+				</section>
+
+				<section>
+					<h3>Variadics</h3>
+					<p>
+						PHP 5.6+ O Lobsomen!
+					</p>
+<pre>
+<code class="php" data-trim>
+class Robot
+{
+    public function talk($parm1, $parm2)    
+    {
+        echo $parm1, $parm2;
+    }
+}
+
+$arr = ['hello', 'world'];
+// Old but GOLD
+call_user_func_array([new Robot, 'talk'], $arr);
+
+// OR WARNING PHP 5.6+
+$robot = new Robot;
+$robot->talk(...$arr);
+</code>
+</pre>
+				</section>
+
+				<section>
+                                    <section>
+					<h3>Instanciando Objetos e Array Dereferencing</h3>
+					<p>
+                                            O Camaleão
+					</p>
+<pre>
+<code class="php" data-trim>
+class Robot
+{
+    // ...
+    public function getBag()    
+    {
+        return ['arms','legs','shoulders','head'];
+    }
+    // ...
+    public function sayHello()
+    {
+        echo 'Hello Human';
+    }
+}
+</code>
+</pre>
+                                    </section>
+                                    <section>
+					<h4>Utilizando a classe:</h4>
+<pre>
+<code class="php" data-trim>
+    
+// Gangsta style execute sayHello
+(new Robot)->sayHello(); // Imprime: Hello Human
+
+// Array Dereferencing
+echo (new Robot)->getBag()[1]; // Imprime: legs
+
+</code>
+</pre>
+                                    </section>
+				</section>
+                                <section>
+                                    <section>
+                                        <h3>Funções Mágicas</h3>
+                                        <p>O mago</p>
+                                        <p><img src="imgs/nopower.gif"></p>
+                                        <p>Aos Javeiros!</p>
+                                    </section>
+                                    <section>
+<pre>
+<code class="php" data-trim>
+class DataMaker
+{
+    protected $matrix;
+    // ...
+    public function __call($name, $args) 
+    {
+        $this->matrix[$name] = $args[0];
+        return $this;
+    }
+    // ...
+}
+</code>
+</pre>
+<pre class="fragment">
+<code class="php" data-trim>
+$dados = (new DataMaker)
+        ->nome('Leonardo')
+        ->telefone('11 95555-2233')
+        ->endereco('Rua Teste 123')
+        ->teste('colocando char especial')
+        ->toClass('Customer');
+        
+var_dump($dados);
+</code>
+</pre>    
+                                    </section>
+                                    <section>
+                                        <h3>Retorno:</h3>
+<pre>
+<code class="php" data-trim>
+object(Customer)[2]
+  public 'nome' => string 'Leonardo' (length=8)
+  public 'telefone' => string '11 97379-7752' (length=13)
+  public 'endereco' => string 'Rua Teste 123' (length=13)
+  public 'teste' => string 'colocando char especial' (length=23)
+</code>
+</pre>    
+                                    </section>
+                                    <section>
+                                        <h4>Algumas ideias usando um Router:</h4>
+<pre>
+<code style="font-size: 20px" class="php" data-trim>
+// A crazy Router interface
+(new GET)['/ola']
+        ->controller('Carro')
+        ->action('hello');
+        
+// A Fluid Interface Programming
+request('POST')
+    ->to('/cliente')
+    ->controller('Carro')
+    ->action('hello');
+
+// Pratical Router
+$post = new Post;
+
+$post['/hello'] = function ($name) {
+    return 'Hello ' . $name;
+};
+</code>
+</pre>    
+                                    </section>
+                                </section>
+				<section>
+                                    <h2>Bom acho que acabamos..</h2>
+<pre>
+<code style="font-size: 20px" class="php" data-trim>
+// A crazy Closure Class
+// ...
+$list = [1, 2, 3];
+
+(new CrazyClosure(function($a, $b, $c){
+    echo 'In:', $a, $b, $c;
+}, function($a, $b, $c){
+    echo 'Out:', $a, $b, $c;
+}))[$list]; 
+
+// Imprime 123Out:123
+
+// O.O
+</code>
+</pre>                                     
+                                    <p class="fragment">Hey! espera! não, não faça isso!</p>
+				</section>
+                                <section data-background="imgs/it-jump.gif">
+                                    
+				</section>
+
+				<section>
+                                    <h3>Espero que tenham gostado, dúvidas?</h3>
+                                    <p>
+                                        <blockquote cite="http://www.goodreads.com/quotes/924-here-s-to-the-crazy-ones-the-misfits-the-rebels-the">
+						&ldquo;Because the people who are crazy enough to think they can change the world, are the ones who do.&rdquo; ―Apple Inc.
+					</blockquote>
+                                    </p>
+                                    
+				</section>
+
+				<section data-background="imgs/thats-all.gif">
+                                    <h1>Obrigado!</h1>
+				</section>
+                                
+                                <section>
+                                    <img src="imgs/chart.png">
+                                    <h3>https://joind.in/14849</h3>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+                                width: 1366,
+                                heigth: 720,    
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
