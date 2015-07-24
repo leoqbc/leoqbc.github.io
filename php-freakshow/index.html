@@ -397,16 +397,16 @@ $post['/hello'] = function ($name) {
 <pre>
 <code style="font-size: 20px" class="php" data-trim>
 // A crazy Closure Class
+
 // ...
-$list = [1, 2, 3];
 
 (new CrazyClosure(function($a, $b, $c){
     echo 'In:', $a, $b, $c;
-}, function($a, $b, $c){
+}, function($a, $b, $c) {
     echo 'Out:', $a, $b, $c;
-}))[$list]; 
-
-// Imprime In:123Out:123
+}))[Closure::bind(function () {
+    return [1,2,3];
+}, new stdClass)->__invoke()]; // Imprime In:123Out:123
 
 // O.O
 </code>
@@ -417,6 +417,30 @@ $list = [1, 2, 3];
                                     
 				</section>
 
+                                <section>
+                                    <h3>Cenas dos próximos capítulos..</h3>
+                                    <p>PHP 7.0.0Beta2</p>
+<pre>
+<code style="font-size: 20px" class="php" data-trim>
+// PHP 7.0.0Beta2
+echo (new class extends ArrayIterator {
+    public $name;
+    public function offsetGet($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+    public function hello(string $string) : string 
+    {
+        return $string . ' ' . $this->name;
+    }
+})['World']->hello('Hello');
+
+// Imprime: Hello World
+</code>
+</pre>                             
+				</section>
+                                
 				<section>
                                     <h3>Espero que tenham gostado, dúvidas?</h3>
                                     <p>
@@ -433,7 +457,13 @@ $list = [1, 2, 3];
                                 
                                 <section>
                                     <img src="imgs/chart.png">
-                                    <h3>https://joind.in/14849</h3>
+                                    <h3><a href="https://joind.in/14849">https://joind.in/14849</a></h3>
+                                    <h4>Slides e eventos em:</h4>
+                                    <h4>
+                                        <a href="https://github.com/leoqbc/php-freakshow">
+                                            https://github.com/leoqbc/php-freakshow
+                                        </a>
+                                    </h4>
 				</section>
 
 			</div>
