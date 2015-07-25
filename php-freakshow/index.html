@@ -50,12 +50,12 @@
                                 
                                 <section>
 					<h2>Sobre mim:</h2>
-                                        <div class="fragment"><small>Formado em Análise e Desenvolvimento de Sistema pela Estácio UniRadial</small></div>
-                                        <div class="fragment"><small>Programador PHP desde 2009</small></div>
-                                        <div class="fragment"><small>Instrutor desde 2012</small></div>
-                                        <div class="fragment"><small>Nas horas vagas: Gamer, Biker, Shooter</small></div>
-                                        <div class="fragment"><small>Evangelista da comunidade <span style="color: #0099cd">PHPSP</span></small></div>
-                                        <div class="fragment"><small>Víciado em séries estranhas!</small></div>
+                                        <div class="fragment">Formado em Análise e Desenvolvimento de Sistema pela Estácio UniRadial</div>
+                                        <div class="fragment">Programador PHP desde 2009</div>
+                                        <div class="fragment">Instrutor desde 2012</div>
+                                        <div class="fragment">Nas horas vagas: Gamer, Biker, Shooter</div>
+                                        <div class="fragment">Evangelista da comunidade <span style="color: #0099cd">PHPSP</span></div>
+                                        <div class="fragment">Víciado em séries estranhas!</div>
 				</section>
                                 
                                 <section>
@@ -392,6 +392,24 @@ $post['/hello'] = function ($name) {
 </pre>    
                                     </section>
                                 </section>
+                                <section>
+                                    <h4>Um pouco de código útil</h4>
+<pre>
+<code style="font-size: 20px" class="php" data-trim>
+// Strange Data Mapper
+// Update data
+(new Funcionario)[2]
+        ->nome('Leonardo')
+        ->endereco('Rua 123, teste 12')
+        ->email('novoemail@teste.com');
+
+// Get data from Database
+$funcionario = (new Funcionario)[2];
+
+echo $funcionario->nome; // Imprime nome do funcionario id 2
+</code>
+</pre>                                    
+                                </section>
 				<section>
                                     <h2>Bom acho que acabamos..</h2>
 <pre>
@@ -458,7 +476,7 @@ echo (new class extends ArrayIterator {
                                 <section>
                                     <img src="imgs/chart.png">
                                     <h3><a href="https://joind.in/14849">https://joind.in/14849</a></h3>
-                                    <h4>Slides e eventos em:</h4>
+                                    <h4>Slides e exemplos em:</h4>
                                     <h4>
                                         <a href="https://github.com/leoqbc/php-freakshow">
                                             https://github.com/leoqbc/php-freakshow
