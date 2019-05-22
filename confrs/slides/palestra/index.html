@@ -1,0 +1,320 @@
+<!doctype html>
+
+<!--
+  A presentation done entirely in Markdown, as found in extras/markdown/.
+  
+  By: @henrikingo
+-->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Architecture over framework</title>
+    
+    <meta name="description" content="Authoring impress.js presentations in Markdown" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="../../extras/highlight/styles/github.css">
+
+        
+    <!--
+        Styles specific for this example presentation. 
+    -->
+    <link href="css/markdown-slides.css" rel="stylesheet" />
+    <link href="css/devopsy.css" rel="stylesheet" />
+    <link href="css/effects.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/dracula.css">
+    
+</head>
+
+<body class="impress-not-supported">
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+<div class="step slide">
+    <img class="img" src="images/logoevento.png" alt="">
+    <h1 style="font-size: 4.5rem">Architecture Over Frameworks</h1>
+
+    <h3>Leonardo Tumadjian</h3>
+    
+    <h2 style="font-size: 22px">
+        <p>@tumadjian</p>
+        <p>github: leoqbc</p>
+    </h2>
+</div>
+
+<div class="step slide" data-rel-y="1900" data-rel-z="-100">
+<h1>Sobre mim</h1>
+
+<img class="perfil" src="images/perfil.jpeg">
+<ul class="sobre">
+    <li>Desenvolvedor PHP a 10 anos</li>
+    <li>CTO @ Multiverse Marketing</li>
+    <li>Professor na Impacta e Senac São Paulo</li>
+    <li>Pós graduado em Engenharia Web</li>
+    <li>Viciado em séries</li>
+</ul>
+
+
+</div>
+
+<div id="markdown" class="step slide markdown" data-rel-x="0" data-rel-y="1900" data-z="2000">
+
+# Momento JABA
+    
+![JABA](images/jaba.jpg)
+
+-----
+# Participe e colabore com sua comunidade mais próxima
+![PHPRS](images/logoconf.png)
+
+![PHPSP](images/phpsp.png)
+
+-----
+# "Preguntas"
+### ???
+
+
+-----
+# Programação Prognostica
+![](images/strange.gif)
+-----
+# Arquitetura?
+
+> "A arquitetura trata-se principalmente da organização do espaço e de seus elementos"
+- Wikipédia
+
+-----
+# Criando o avião
+
+[Video de avião](https://www.youtube.com/watch?v=dfgOUol4F4k)
+
+-----
+# Frameworks, como funcionam por trás dos panos
+
+![kaleese](images/cortinas.jpg)
+
+
+-----
+# Flow
+![base](images/grafico.png)
+
+-----
+# O que um framework deve fazer de verdade?
+
+* Ajudar na limpeza dos dados (segurança)
+* Facilitar a comunicação com DBs
+* Prover uma configuração padronizada
+* Evitar CSRF (segurança)
+* Cuidar do roteamento de URLs
+* Implementar um DIC(contêiner)
+
+-----
+# Arquitetura, não ferramentas
+
+![](images/angry.gif)
+> "Você não quer se casar com o Framework" 
+- Bob, Uncle
+
+
+-----
+# Vejamos
+
+* Depender de abstrações(interfaces)
+* Composition over inheritance
+* Princípios de SOLID
+* Banco de dados é só um detalhe
+* O Framework também! :D
+
+-----
+# Tipos de arquiteturas mais comuns
+
+* Hexagonal - **Alistair Cockburn**
+* Domain Driven Design - **Erik Evans**
+* Clean Architecture - **Robert C. Martin**
+
+-----
+# Por que ainda MVC?
+
+![boy](images/garoto.gif)
+
+-----
+# WTF Laravel??
+
+        namespace App\Http\Controllers;
+
+        use App\User;
+        use App\Http\Controllers\Controller;
+
+        class UserController extends Controller
+        {
+            public function show($id)
+            {
+                return view('user.profile', [ // who the hell is view?
+                    'user' => User::findOrFail($id) // extends model
+                ]);
+            }
+        }
+
+-----
+        namespace App\Http\Controllers;
+
+        use App\EntityManager;
+        use App\Entities\User;
+        use App\Output\Presenter;
+
+        class UserController
+        {
+            public function __construct(EntityManager $entityManager, Presenter $presenter)
+            {
+                $this->entityManager = $entityManager;
+                $this->presenter = $presenter;
+            }
+
+            public function show($id)
+            {
+                return $this->presenter->display('user.profile', [
+                    'user' => $this->entintyManager->find(User::class, $id); 
+                ]);
+            }
+        }   
+-----
+# Foco no business
+1. Teste unitário nas Entities/Domínios
+2. Entities somente com regras de negócios
+3. Quem cuida da **hidratação** é o EntityManager(ORM)
+4. Abstração em INPUT e OUTPUT
+5. Camada de banco fica para os Repositories(DDD);
+6. Serviços guiados a interfaces
+7. A inicialização do framework pode ser abstraída*
+
+*não é garantido abstração total do framework pois existem configurações/fregmentos além da inicialização
+-----
+# A Web como I/O
+
+![](images/ioweb.png)
+-----
+## Design alternável
+        interface InputType 
+        {
+            public function setData(array $inputData) : bool;
+            public function getFormatedInput();
+        }
+        interface OutputType
+        {
+            public function setData(array $outputData) : bool;
+            public function getFormatedOutput();
+        }
+        interface Presenter 
+        {
+            public function display(string $mode, array $variables, OutputType $output);
+        }
+-----
+## Persistência e inicialização do framework abstratos
+
+        interface Persistance
+        {
+            // ...
+        }
+
+        interface FrameworkInit
+        {
+            // ...
+        }
+
+-----
+# Sucesso!!!
+
+![](images/rocking.gif)
+
+-----
+# Clean Architecture
+
+![](images/cleanarch.png)
+
+-----
+# Outra sugestão
+![](images/cleanarch2.png)
+
+-----
+# Livros que recomendo
+
+- Patterns of Enterprise Application Architecture - **Martin Fowler**
+- Clean Code - **Robert C. Martin**
+- Clean Architecture - **Robert C. Martin**
+- Refactoring - **Martin Fowler**
+- Domain Driven Design - **Eric Evans**
+
+
+</div>
+
+<div id="tilted-slide" class="step slide markdown" data-rotate="-85" data-x="2000" data-y="2000" data-z="1000" data-scale="3">
+## Um mundo sombrio
+![](images/thor1.gif)
+![](images/thor2.gif)
+</div>
+
+<script type="text/javascript">
+var enableBwCss = function(){
+    disableDevopsCss();
+    disableEffectsCss();
+};
+
+var enableDevopsCss = function(){
+    document.body.classList.add("devopsy");
+    disableEffectsCss();
+};
+
+var disableDevopsCss = function(){
+    document.body.classList.remove("devopsy");
+};
+
+var enableEffectsCss = function(){
+    document.body.classList.add("effects");
+    disableDevopsCss();
+};
+
+var disableEffectsCss = function(){
+    document.body.classList.remove("effects");
+};
+</script>
+
+<div id="js-slide" class="step slide markdown" data-rotate="0" data-x="4000" data-y="6000">
+# Obrigado!
+
+![](images/thankyou.gif)
+
+## Dúvidas??
+
+## slides em breve no github
+
+</div>
+
+</div>
+
+<div id="impress-toolbar"></div>
+<div id="impress-help"></div>
+
+
+<!-- Extra modules
+     Load highlight.js, mermaid.js and markdown.js from extras.
+     See also src/plugins/extras/extras.js -->
+<script type="text/javascript" src="../../extras/highlight/highlight.pack.js"></script>
+<script type="text/javascript" src="../../extras/mermaid/mermaid.min.js"></script>
+<script type="text/javascript" src="../../extras/markdown/markdown.js"></script>
+
+<!--
+    To make all described above really work, you need to include impress.js in the page.
+    You also need to call a `impress().init()` function to initialize impress.js presentation.
+    And you should do it in the end of your document. 
+-->
+<script type="text/javascript" src="../../js/impress.js"></script>
+<script>
+impress().init();
+enableEffectsCss();
+</script>
+</body>
+</html>
